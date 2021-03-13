@@ -1,0 +1,359 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>TicTacToe</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-LBTY6079EN"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-LBTY6079EN');
+</script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+        body {
+            background: linear-gradient(to right, rgb(201, 149, 243), rgb(182, 224, 248))
+        }
+        
+        #tictactoe {
+            background: linear-gradient(to right, rgb(145, 19, 248), rgb(34, 174, 255));
+            width: 280px;
+            border-radius: 10px;
+        }
+        
+        #tictactoe h1 {
+            font-family: 'Pacifico', cursive;
+            color: aliceblue;
+            font-weight: 200;
+        }
+        
+        button {
+            width: 70px;
+            height: 85px;
+            font-family: 'Pacifico', cursive;
+            border-radius: none;
+            border: none;
+            background: linear-gradient(0deg, rgb(218, 216, 216), rgb(171, 243, 233));
+            cursor: pointer;
+            font-size: 50px;
+            outline: none;
+            margin: 0.07em;
+        }
+        
+        .btn1 {
+            border-radius: 10px 0 0 0;
+        }
+        
+        .btn3 {
+            border-radius: 0 10px 0 0;
+        }
+        
+        .btn7 {
+            border-radius: 0 0 0 10px;
+        }
+        
+        .btn9 {
+            border-radius: 0 0 10px 0;
+        }
+        
+        #p1 {
+            font-family: 'Pacifico', cursive;
+            font-size: 15px;
+            color: whitesmoke;
+            margin-top: -2em;
+            margin-bottom: -0.8em;
+        }
+        
+        #turn {
+            font-family: 'Pacifico', cursive;
+            font-size: 15px;
+            color: whitesmoke;
+            margin-top: -0.5em;
+        }
+        
+        #control,
+        #newgame {
+            border-radius: 10px;
+            font-size: 15px;
+            width: auto;
+            height: auto;
+        }
+        
+        .fa {
+            justify-content: center;
+            align-items: center;
+            padding: 12px;
+            border-radius: 50%;
+        }
+        
+        .fa-linkedin {
+            background-color: rgb(40, 103, 178);
+            color: white;
+        }
+        
+        .fa-linkedin:hover {
+            background-color: cornsilk;
+            color: blue
+        }
+        
+        .fa-instagram {
+            background-color: rgb(214, 104, 41);
+            color: white;
+        }
+        
+        .fa-instagram:hover {
+            background-color: cornsilk;
+            color: orangered;
+            outline: none;
+        }
+        
+        .fa-github {
+            background-color: rgb(50, 51, 53);
+            color: white;
+        }
+        
+        .fa-github:hover {
+            background-color: cornsilk;
+            color: rgb(11, 11, 14)
+        }
+        
+        .fa-at {
+            background-color: rgb(224, 32, 32);
+            color: white;
+        }
+        
+        .fa-at:hover {
+            background-color: cornsilk;
+            color: rgb(241, 22, 22)
+        }
+        
+        .fa-phone {
+            background-color: rgb(23, 146, 54);
+            color: white;
+        }
+        
+        .fa-phone:hover {
+            background-color: cornsilk;
+            color: rgb(32, 155, 42)
+        }
+        
+        #footer {
+            animation: come 7s 1;
+            animation-timing-function: ease;
+            animation-delay: 0s;
+            
+            width: 100%;
+            display: block;
+        }
+        
+        #footer p {
+            font-family: 'Pacifico', cursive;
+            font-size: 12px;
+            margin: 0.2em;
+        }
+        
+        #s1,
+        #s2 {
+            font-family: 'Pacifico', cursive;
+            font-size: 25px;
+            color: whitesmoke;
+        }
+    </style>
+    <script>
+        var turn = 0;
+        var s1 = 0;
+        var s2 = 0;
+
+        function play(count) {
+            if (document.getElementById(count).innerHTML == "-") {
+                if (turn % 2 == 0) {
+                    document.getElementById(count).innerHTML = "X";
+                    document.getElementById("turn").innerHTML = "Player 2 Turn"
+                } else {
+                    document.getElementById(count).innerHTML = "O";
+                    document.getElementById("turn").innerHTML = "Player 1 Turn"
+                }
+                turn += 1;
+            }
+            for (i = 1; i <= 3; i++) {
+                if (document.getElementById(i.toString()).innerHTML == "O" &&
+                    document.getElementById((i + 3).toString()).innerHTML == "O" &&
+                    document.getElementById((i + 6).toString()).innerHTML == "O") {
+                    document.getElementById("turn").innerHTML = "Player 2 Wins";
+                    s2 += 1;
+                    document.getElementById("s2").innerHTML = s2;
+                    for (i = 1; i <= 9; i++) {
+                        document.getElementById(i.toString()).disabled = true;
+                        turn = 0;
+                    }
+                    document.getElementById("control").innerHTML = "Play Again";
+                    return
+                }
+                if (document.getElementById(i.toString()).innerHTML == "X" &&
+                    document.getElementById((i + 3).toString()).innerHTML == "X" &&
+                    document.getElementById((i + 6).toString()).innerHTML == "X") {
+                    document.getElementById("turn").innerHTML = "Player 1 Wins";
+                    s1 += 1;
+                    document.getElementById("s1").innerHTML = s1;
+                    for (i = 1; i <= 9; i++) {
+                        document.getElementById(i.toString()).disabled = true;
+                        turn = 0;
+                    }
+                    document.getElementById("control").innerHTML = "Play Again";
+                    return
+                }
+            }
+            for (i = 1; i <= 9; i += 3) {
+                if (document.getElementById(i.toString()).innerHTML == "O" &&
+                    document.getElementById((i + 1).toString()).innerHTML == "O" &&
+                    document.getElementById((i + 2).toString()).innerHTML == "O") {
+                    document.getElementById("turn").innerHTML = "Player 2 Wins";
+                    s2 += 1;
+                    document.getElementById("s2").innerHTML = s2;
+                    for (i = 1; i <= 9; i++) {
+                        document.getElementById(i.toString()).disabled = true;
+                        turn = 0;
+                    }
+                    document.getElementById("control").innerHTML = "Play Again";
+                    return
+                }
+                if (document.getElementById(i.toString()).innerHTML == "X" &&
+                    document.getElementById((i + 1).toString()).innerHTML == "X" &&
+                    document.getElementById((i + 2).toString()).innerHTML == "X") {
+                    document.getElementById("turn").innerHTML = "Player 1 Wins";
+                    s1 += 1;
+                    document.getElementById("s1").innerHTML = s1;
+                    for (i = 1; i <= 9; i++) {
+                        document.getElementById(i.toString()).disabled = true;
+                        turn = 0;
+                    }
+                    document.getElementById("control").innerHTML = "Play Again";
+                    return
+                }
+            }
+            if (document.getElementById("1").innerHTML == "O" &&
+                document.getElementById("5").innerHTML == "O" &&
+                document.getElementById("9").innerHTML == "O") {
+                document.getElementById("turn").innerHTML = "Player 2 Wins";
+                s2 += 1;
+                document.getElementById("s2").innerHTML = s2;
+                for (i = 1; i <= 9; i++) {
+                    document.getElementById(i.toString()).disabled = true;
+                    turn = 0;
+                }
+                document.getElementById("control").innerHTML = "Play Again";
+                return
+            }
+            if (document.getElementById("1").innerHTML == "X" &&
+                document.getElementById("5").innerHTML == "X" &&
+                document.getElementById("9").innerHTML == "X") {
+                document.getElementById("turn").innerHTML = "Player 1 Wins";
+                s1 += 1;
+                document.getElementById("s1").innerHTML = s1;
+                for (i = 1; i <= 9; i++) {
+                    document.getElementById(i.toString()).disabled = true;
+                    turn = 0;
+                }
+                document.getElementById("control").innerHTML = "Play Again";
+                return
+            }
+            if (document.getElementById("3").innerHTML == "O" &&
+                document.getElementById("5").innerHTML == "O" &&
+                document.getElementById("7").innerHTML == "O") {
+                document.getElementById("turn").innerHTML = "Player 2 Wins";
+                s2 += 1;
+                document.getElementById("s2").innerHTML = s2;
+                for (i = 1; i <= 9; i++) {
+                    document.getElementById(i.toString()).disabled = true;
+                    turn = 0;
+                }
+                document.getElementById("control").innerHTML = "Play Again";
+                return
+            }
+            if (document.getElementById("3").innerHTML == "X" &&
+                document.getElementById("5").innerHTML == "X" &&
+                document.getElementById("7").innerHTML == "X") {
+                document.getElementById("turn").innerHTML = "Player 1 Wins";
+                s1 += 1;
+                document.getElementById("s1").innerHTML = s1;
+                for (i = 1; i <= 9; i++) {
+                    document.getElementById(i.toString()).disabled = true;
+                    turn = 0;
+                }
+                document.getElementById("control").innerHTML = "Play Again";
+                return
+            }
+
+        }
+
+        function control() {
+            for (i = 1; i <= 9; i++) {
+                document.getElementById(i.toString()).innerHTML = "-";
+                document.getElementById(i.toString()).disabled = false;
+                turn = 0;
+
+                document.getElementById("turn").innerHTML = "Player 1 turn";
+            }
+        }
+
+        function newgame() {
+            for (i = 1; i <= 9; i++) {
+                document.getElementById(i.toString()).innerHTML = "-";
+                document.getElementById(i.toString()).disabled = false;
+                turn = 0;
+                s1 = 0;
+                s2 = 0;
+                document.getElementById("s1").innerHTML = s1;
+                document.getElementById("s2").innerHTML = s2;
+                document.getElementById("turn").innerHTML = "Player 1 turn";
+            }
+        }
+    </script>
+</head>
+
+<body><br>
+    <center>
+        <div id="tictactoe">
+            <h1>Tic-Tac-Toe</h1>
+            <p id="p1">Player 1 : X &nbsp;&nbsp; Player 2 : O</p>
+            <span id="s1">0</span> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;<span id="s2">0</span>
+            <p id="turn"></p>
+
+            <button class="btn1" id="1" onclick="play('1')">-</button>
+            <button class="btn2" id="2" onclick="play('2')">-</button>
+            <button class="btn3" id="3" onclick="play('3')">-</button>
+            <button class="btn4" id="4" onclick="play('4')">-</button>
+            <button class="btn5" id="5" onclick="play('5')">-</button>
+            <button class="btn6" id="6" onclick="play('6')">-</button>
+            <button class="btn7" id="7" onclick="play('7')">-</button>
+            <button class="btn8" id="8" onclick="play('8')">-</button>
+            <button class="btn9" id="9" onclick="play('9')">-</button>
+
+            <br><br>
+            <button id="control" onclick="control()">Restart</button>
+            <button id="newgame" onclick="newgame()">New Game</button>
+            <br><br>
+        </div><br><br>
+        <div id="footer">
+            <center>
+                <div class="info"><br>
+                    <p>Contact Me:-</p>
+                    <a href="mailto:devansh.marwaha400@gmail.com"><i class="fa fa-at" style="font-size:15px;"></i></a>
+                    <a href="tel:8968096689"><i class="fa fa-phone"style="font-size:15px;"></i></a>
+                    <a class="lol" href="https://github.com/devanshmarwaha"><i class="fa fa-github" style="font-size:15px;"></i></a>
+                    <a href="https://www.linkedin.com/in/devansh-marwaha-a548b918b"><i class="fa fa-linkedin" style="font-size:15px;"></i></a>
+                    <a href="http://instagram.com/devansh._.marwaha"><i class="fa fa-instagram" style="font-size:15px;"></i></a>
+                    <p>Made By Devansh Marwaha</p>
+                </div>
+            </center>
+        </div>
+    </center>
+
+</body>
+
+</html>
